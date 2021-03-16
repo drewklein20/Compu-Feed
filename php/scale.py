@@ -13,10 +13,10 @@ mydb = mysql.connector.connect(
 )
 
 dbcursor = mydb.cursor()
-dbcursor.execute("SELECT JSON_UNQUOTE(JSON_EXTRACT(preferences, '$.isUsingScale')) as isUsingScale, JSON_UNQUOTE(JSON_EXTRACT(preferences, '$.referenceUnit')) as referenceUnit FROM Feeder.Settings;")
+dbcursor.execute("SELECT JSON_UNQUOTE(JSON_EXTRACT(preferences, '$.isUsingScale')) as isUsingScale, JSON_UNQUOTE(JSON_EXTRACT(preferences, '$.scaleReferenceUnit')) as referenceUnit FROM Feeder.Settings;")
 dbresult = dbcursor.fetchone()
 
-if dbresult[0] == 'true'
+if dbresult[0] == 'true':
     referenceUnit = int(dbresult[1])
 
     previousWeight = 0
