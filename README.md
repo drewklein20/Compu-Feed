@@ -126,5 +126,15 @@ sudo raspi-config
 ```
 Set your timezone under Localization Options (US central is what I used)
 
+### 13.) Calibrating scale
+* First in the app settings, enable the scale and save.  
+* Find an object that you know the exact weight of in grams or kg (I used an echo dot & I googled the weight)  
+* cd into the pet-feeder directory and run the following (you should see values being output)
+```
+sudo python scale-example.py
+```
+* Now add the object to the scale
+
+
 
 
