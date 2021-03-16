@@ -64,7 +64,7 @@ Then run
 sudo mysql
 ```
 
-And enter each command below
+And enter each command below (don't modify the username or password unless you plan on changing the source code)
 ```
 USE FEEDER;
 CREATE USER 'remote'@'localhost' IDENTIFIED BY 'PetFeeder2021!';
