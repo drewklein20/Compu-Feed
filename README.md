@@ -71,11 +71,11 @@ sudo raspi-config
 ```
 cd ~/
 git clone https://github.com/drewklein20/pet-feeder.git
-cd pet-feeder
 ```
 
-### 7.) Build DB and Webserver (in pet-feeder dir)
+### 7.) Build DB and Webserver
 ```
+cd pet-feeder
 sudo chmod +x build.sh
 sudo ./build.sh
 ```
