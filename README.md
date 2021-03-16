@@ -15,6 +15,15 @@ sudo pip install install mysql-connector-python pigpio RPi.GPIO pysinric
 sudo pip3 install hx711
 sudo apt-get install pigpio
 sudo pigpiod
+
+```
+## Give PHP permissions for python scripts
+```
+sudo visudo
+```
+At the bottom of this file, append the following line and save
+```
+www-data ALL=NOPASSWD: ALL
 ```
 
 ## Configure mysql
