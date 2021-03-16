@@ -33,7 +33,7 @@ You will be asked Enter current password for root (type a secure password): pres
 Type in Y and press Enter to Set root password  
 Type in a password at the New password: prompt, and press Enter. Important: remember this root password, as you will need it later  
 Type in Y to Remove anonymous users  
-Type in Y to Disallow root login remotely  
+Type in N to Disallow root login remotely  
 Type in Y to Remove test database and access to it  
 Type in Y to Reload privilege tables now  
 
