@@ -51,12 +51,12 @@ Restart mysql
 sudo service mysql restart
 ```
 
-## Set your rpi hostname to petfeeder (Don't skip this step, backend is setup to talk to this hostname)
+## Set your rpi hostname to feeder (Don't skip this step, backend is setup to talk to this hostname)
 ```
 sudo raspi-config
 ```
 Go to system options -> hostname  
-Set hostname to petfeeder and reboot  
+Set hostname to feeder and reboot  
 
 ## Clone source code
 ```
