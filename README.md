@@ -19,13 +19,13 @@ sudo pip3 install hx711
 ```
 sudo mysql_secure_installation
 ```
-You will be asked Enter current password for root (type a secure password): press Enter
-Type in Y and press Enter to Set root password
-Type in a password at the New password: prompt, and press Enter. Important: remember this root password, as you will need it later
-Type in Y to Remove anonymous users
-Type in Y to Disallow root login remotely
-Type in Y to Remove test database and access to it
-Type in Y to Reload privilege tables now
+You will be asked Enter current password for root (type a secure password): press Enter  
+Type in Y and press Enter to Set root password  
+Type in a password at the New password: prompt, and press Enter. Important: remember this root password, as you will need it later  
+Type in Y to Remove anonymous users  
+Type in Y to Disallow root login remotely  
+Type in Y to Remove test database and access to it  
+Type in Y to Reload privilege tables now  
 
 
 ### edit mysql binded address (obtain your IP first)
@@ -45,8 +45,8 @@ sudo service mysql restart
 ```
 sudo raspi-config
 ```
-Go to system options -> hostname 
-Set hostname to petfeeder and reboot
+Go to system options -> hostname  
+Set hostname to petfeeder and reboot  
 
 ## Clone source code
 ```
@@ -84,8 +84,8 @@ sudo ./build.sh
 Go to http://petfeeder.local and login with username 'admin' and password 'password'
 
 ### Configuring Alexa
-Log into the feeder and enable Alexa in the settings
-Go to https://sinric.com/ and create a free account
-Copy the synric API key ("Your API Key") and save it in the feeder settings for Synric API Key
+Log into the feeder and enable Alexa in the settings  
+Go to https://sinric.com/ and create a free account  
+Copy the synric API key ("Your API Key") and save it in the feeder settings for Synric API Key  
 Create a new smart home decice on the synric site (device type: switch). Copy the deviceId and save it in the feeder settings for Synric DeviceId
 
