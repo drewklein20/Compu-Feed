@@ -8,8 +8,8 @@ This project was created with inspiration from Rob Peck's project (https://githu
 * Trigger with Alexa
 * Ability to integrate hx711 load cell for bowl weight (keeps from over feeding)
 * Authentication
+![1](https://user-images.githubusercontent.com/21964743/111546567-de7a9200-8745-11eb-9b34-6f1579d97062.png)
 
-![Optional Text](../master/screenshots/1.png)
 
 ## Required Parts
 * Raspberry pi (I used a raspberry pi zero w) running raspian buster
