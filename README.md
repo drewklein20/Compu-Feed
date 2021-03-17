@@ -19,13 +19,17 @@ This project was created with inspiration from Rob Peck's project (https://githu
 I won't go into detailed instructions for how to build the feeder. If you are looking for an example, check out Rob Peck's project (https://github.com/peckrob/petfeedd).
 
 ### Wiring servo
-
+* Attach the ground wire to GND on the Raspberry Pi. 
+* Attach the signal wire to the GPIO 17 pin on the Raspberry Pi.
+* Attach the power pin to 5V on the Raspberry Pi.
 
 ### Wiring scale
+* Attach the ground wire to GND on the Raspberry Pi.
+* Attach the DT wire to the GPIO 5 pin on the Raspberry Pi.
+* Attach the SCK wire to the GPIO 6 pin on the Raspberry Pi.
+* Attach the power pin to 5V on the Raspberry Pi.
 
-
-
-
+## RPI setup
 ### 1.) Install required packages
 ```
 sudo apt update && sudo apt upgrade -y
