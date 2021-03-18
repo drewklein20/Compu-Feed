@@ -18,11 +18,12 @@ This project was created with inspiration from Rob Peck's project (https://githu
 ![6](https://user-images.githubusercontent.com/21964743/111547426-2221cb80-8747-11eb-93cd-e86857930051.png)
 ---
 
-## Required Parts
+## Parts List
 * Raspberry pi (I used a raspberry pi zero w) running raspian buster
 * Cereal dispenser [amazon](https://www.amazon.com/Honey-Can-Do-Dispenser-Single-Control-Chrome/dp/B00013K8O4/ref=sr_1_2?dchild=1&keywords=cereal+dispenser+single&qid=1595785048&sr=8-2)  
 * 360 Servo [amazon](https://www.amazon.com/American-Robotic-Supply-Continuous-Rotation/dp/B01MSAIL3D/ref=sr_1_8?dchild=1&keywords=360+servo&qid=1595785295&sr=8-8.)
 * Scale (optional) [amazon](https://www.amazon.com/MakerHawk-Converter-Breakout-Portable-Electronic/dp/B07GQPV6C4/ref=sr_1_2?dchild=1&keywords=hx711+scale&qid=1616004621&sr=8-2)
+* PVC T pipe (If wanting to feed two bowls) [amazon](https://www.amazon.com/MakerHawk-Converter-Breakout-Portable-Electronic/dp/B07GQPV6C4/ref=sr_1_2?dchild=1&keywords=hx711+scale&qid=1616004621&sr=8-2)
 ---  
 
 ## Building the feeder
