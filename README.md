@@ -1,4 +1,4 @@
-# Raspberry PI Dog Feeder
+# Raspberry Pi Dog Feeder
 This project was created with inspiration from Rob Peck's project (https://github.com/peckrob/petfeedd)  
 
 ## Features:
@@ -16,26 +16,30 @@ This project was created with inspiration from Rob Peck's project (https://githu
 ![4](https://user-images.githubusercontent.com/21964743/111547230-d2db9b00-8746-11eb-8b46-7b7af69e97a9.png)
 ![5](https://user-images.githubusercontent.com/21964743/111547231-d3743180-8746-11eb-8058-2e5eb90eba2e.png)
 ![6](https://user-images.githubusercontent.com/21964743/111547426-2221cb80-8747-11eb-93cd-e86857930051.png)
+---
 
-## Required Parts
+## Parts List
 * Raspberry pi (I used a raspberry pi zero w) running raspian buster
 * Cereal dispenser [amazon](https://www.amazon.com/Honey-Can-Do-Dispenser-Single-Control-Chrome/dp/B00013K8O4/ref=sr_1_2?dchild=1&keywords=cereal+dispenser+single&qid=1595785048&sr=8-2)  
 * 360 Servo [amazon](https://www.amazon.com/American-Robotic-Supply-Continuous-Rotation/dp/B01MSAIL3D/ref=sr_1_8?dchild=1&keywords=360+servo&qid=1595785295&sr=8-8.)
 * Scale (optional) [amazon](https://www.amazon.com/MakerHawk-Converter-Breakout-Portable-Electronic/dp/B07GQPV6C4/ref=sr_1_2?dchild=1&keywords=hx711+scale&qid=1616004621&sr=8-2)
+* PVC T pipe (If wanting to feed two bowls) [amazon](https://www.amazon.com/MakerHawk-Converter-Breakout-Portable-Electronic/dp/B07GQPV6C4/ref=sr_1_2?dchild=1&keywords=hx711+scale&qid=1616004621&sr=8-2)
+---  
 
 ## Building the feeder
 I won't go into detailed instructions for how to build the feeder. If you are looking for an example, check out Rob Peck's project (https://github.com/peckrob/petfeedd).
 
-### Wiring servo
+### 1.) Wiring servo
 * Attach the ground wire to GND on the Raspberry Pi. 
 * Attach the signal wire to the GPIO 17 pin on the Raspberry Pi.
 * Attach the power pin to 5V on the Raspberry Pi.
 
-### Wiring scale
+### 2.) Wiring scale
 * Attach the ground wire to GND on the Raspberry Pi.
 * Attach the DT wire to the GPIO 5 pin on the Raspberry Pi.
 * Attach the SCK wire to the GPIO 6 pin on the Raspberry Pi.
 * Attach the power pin to 5V on the Raspberry Pi.
+---
 
 ## RPI setup
 ### 1.) Install required packages
@@ -162,7 +166,19 @@ sudo python scale-example.py
     ```
     hx.set_reading_format("MSB", "MSB")
     ```
-
-
-
-
+---
+## Developing further
+*Note: You will need to have npm installed (building with npm will take quite a while on an RPI zero).  
+If you are feeling like building onto the app, or making changes to the code. You can do so by running the following in the root directory:
+```
+npm run serve
+```
+Then when you are finished, run the following to compile the code:
+```
+npm run build
+```
+And finally, rerun the following to re-build the webserver:
+```
+sudo chmod +x build.sh
+sudo bash -x build.sh
+```
