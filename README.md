@@ -10,6 +10,7 @@ This project was created with inspiration from Rob Peck's project (https://githu
 * Authentication
 
 ![1](https://user-images.githubusercontent.com/21964743/111547226-d2430480-8746-11eb-94c9-4704c1b65c43.png)
+![7](https://user-images.githubusercontent.com/21964743/111632005-0b6c8a80-87c2-11eb-82af-f916baa63f87.png)
 ![2](https://user-images.githubusercontent.com/21964743/111547227-d2db9b00-8746-11eb-955f-82c2f4d3681b.png)
 ![3](https://user-images.githubusercontent.com/21964743/111547229-d2db9b00-8746-11eb-98fe-acf8b09fae75.png)
 ![4](https://user-images.githubusercontent.com/21964743/111547230-d2db9b00-8746-11eb-8b46-7b7af69e97a9.png)
