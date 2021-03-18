@@ -1,5 +1,13 @@
 #!/bin/bash
 
+while getopts t: flag
+do
+    case "${flag}" in
+        t) buildType=${OPTARG};;
+    esac
+done
+echo "Build Type: $buildType";
+
 sudo service mysql restart
 sudo mysql -u root -pPetFeeder2021! < schema.sql
 
