@@ -167,7 +167,7 @@ sudo python scale-example.py
     ```
 ---
 ## Developing further
-*Note: You will need to have npm installed.
+*Note: You will need to have npm installed (building with npm will take quite a while on an RPI zero).  
 If you are feeling like building onto the app, or making changes to the code. You can do so by running the following in the root directory:
 ```
 npm run serve
