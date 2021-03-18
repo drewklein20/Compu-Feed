@@ -64,3 +64,4 @@ cd /var/www/html/
      done
  )
  echo "Finished!";
+ echo "Visit http://${CURRENT_HOSTNAME}.local"
