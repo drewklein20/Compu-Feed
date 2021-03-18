@@ -66,9 +66,9 @@ www-data ALL=NOPASSWD: ALL
 ```
 sudo mysql_secure_installation
 ```
-You will be asked Enter current password for root (enter __PetFeeder2021!__): press Enter  
-Type in Y and press Enter to Set root password  
-Type in a password at the New password: prompt, and press Enter. Important: remember this root password, as you will need it later  
+You will be asked Enter current password for root. Enter your password if one is set and press Enter  
+Type in Y and press Enter to set the root password  
+Type in __PetFeeder2021!__ for the password at the New password: prompt, and press Enter. Important: The database import will not work unless this is set correctly. 
 Type in Y to Remove anonymous users  
 Type in N to Disallow root login remotely  
 Type in Y to Remove test database and access to it  
