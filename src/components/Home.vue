@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-container>
     <v-row dense>
       <v-col cols="12">
@@ -30,34 +31,56 @@
             >
               Feed Now
             </v-btn>
+            <v-spacer></v-spacer>
+            <v-card>
+              <v-row>
+                <v-col>
+                  <v-img
+                    v-if="settings.isUsingCamera"
+                    :lazy-src="currentImg"
+                    max-height="80"
+                    max-width="70"
+                    :src="currentImg"
+                  ></v-img>
+                </v-col>
+                <v-col class="smallCol">
+                   <v-layout align-center justify-center class="pt-2 pb-6">
+                  <v-icon large color="white" class="pt-3" @click="openPreview">
+                    mdi-eye
+                  </v-icon>
+                   </v-layout>
+                </v-col>
+              </v-row>
+            </v-card>
           </v-card-actions>
         </v-card>
       </v-col>
       <v-col cols="12" class="pt-4">
         <v-card color="primary" dark>
           <v-card-title class="headline mb-3">
-            {{settings.petName}} {{settings.twoBowls ? 'have' : 'has'}} eaten
+            {{ settings.petName }}
+            {{ settings.twoBowls ? "have" : "has" }} eaten
           </v-card-title>
 
           <v-card-text class="pb-8">
             <v-row>
               <v-col class="light-text">
-                {{ totalWeight }} 
+                {{ totalWeight }}
                 <v-icon class="ml-2" color="secondary" dark>
-                    mdi-cup
-                  </v-icon>
+                  mdi-cup
+                </v-icon>
               </v-col>
               <v-col class="light-text">
                 {{ (totalWeight / cupsPerBag).toFixed(2) }}
-                  <v-icon class="ml-2" color="secondary" dark>
-                    mdi-sack
-                  </v-icon>
+                <v-icon class="ml-2" color="secondary" dark>
+                  mdi-sack
+                </v-icon>
               </v-col>
               <v-col class="light-text">
                 {{ (totalWeight / cupsPerBag / 3000).toFixed(2) }}
-                  <v-icon class="ml-2" color="secondary" dark>
-                    mdi-car-pickup
-                  </v-icon>
+                <v-icon class="ml-2" color="secondary" dark>
+                  mdi-car-pickup
+                </v-icon>
               </v-col>
             </v-row>
           </v-card-text>
@@ -73,13 +96,14 @@
 
           <div class="feed-times ml-4 mr-4">
             <span class="dark-text feed-time">
-              {{ lastFeed | formatRelative }} ({{lastFeedAmount}} {{lastFeedAmount > 1 ? ' Cups' : 'Cup'}})
+              {{ lastFeed | formatRelative }} ({{ lastFeedAmount }}
+              {{ lastFeedAmount > 1 ? " Cups" : "Cup" }})
             </span>
             <span class="dark-text feed-time align-right">
-              {{ nextFeed | formatRelative }} ({{nextFeedAmount}} {{nextFeedAmount > 1 ? ' Cups' : 'Cup'}})
+              {{ nextFeed | formatRelative }} ({{ nextFeedAmount }}
+              {{ nextFeedAmount > 1 ? " Cups" : "Cup" }})
             </span>
           </div>
-          
 
           <v-card-actions>
             <v-btn
@@ -97,6 +121,20 @@
       </v-col>
     </v-row>
   </v-container>
+  <v-dialog
+        v-model="isPreviewingImg"
+        max-width="600px"
+      >
+      <v-card>
+        <v-img
+          v-if="settings.isUsingCamera"
+          :lazy-src="currentImg"
+          :src="currentImg"
+        ></v-img>
+      </v-card>
+    </v-dialog>
+
+</div>
 </template>
 
 <script>
@@ -122,6 +160,7 @@ export default {
     padding: 8,
     radius: 10,
     value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+    isPreviewingImg: false
   }),
   async mounted() {
     await this.fetchData();
@@ -139,6 +178,9 @@ export default {
         return [];
       }
     },
+    currentImg() {
+      return process.env.VUE_APP_CAM_RESOURCES + "live.jpg";
+    },
     totalWeight() {
       let sum = 0;
 
@@ -150,7 +192,7 @@ export default {
       }
 
       if (this.settings.twoBowls == true) {
-        sum = sum * 2
+        sum = sum * 2;
       }
 
       return sum;
@@ -169,7 +211,7 @@ export default {
     },
     lastFeedAmount() {
       if (this.logs.length) {
-        return this.logs[0].amount
+        return this.logs[0].amount;
       } else {
         return null;
       }
@@ -177,69 +219,71 @@ export default {
     nextFeed() {
       if (this.scheduledFeeds.length) {
         let now = moment();
-        let closestFeed = moment().add(4,'days');
+        let closestFeed = moment().add(4, "days");
 
         for (let element of this.scheduledFeeds) {
           if (element.feedTime < this.timeRightNow) {
-            let timeSplit = element.feedTime.split(':')
-            let feedDate = moment().add(1,'days');
-            feedDate.set({h: timeSplit[0], m: timeSplit[1]});
- 
-            if (feedDate < closestFeed) {
-              closestFeed = feedDate
-            }
-          } else {
-            let timeSplit = element.feedTime.split(':')
-            let feedDate = moment();
-            feedDate.set({h: timeSplit[0], m: timeSplit[1]});
+            let timeSplit = element.feedTime.split(":");
+            let feedDate = moment().add(1, "days");
+            feedDate.set({ h: timeSplit[0], m: timeSplit[1] });
 
             if (feedDate < closestFeed) {
-              closestFeed = feedDate
+              closestFeed = feedDate;
+            }
+          } else {
+            let timeSplit = element.feedTime.split(":");
+            let feedDate = moment();
+            feedDate.set({ h: timeSplit[0], m: timeSplit[1] });
+
+            if (feedDate < closestFeed) {
+              closestFeed = feedDate;
             }
           }
         }
 
-        return closestFeed.format()
+        return closestFeed.format();
       } else {
         return null;
       }
     },
     nextFeedAmount() {
       if (this.scheduledFeeds.length) {
-        let amount = ''
+        let amount = "";
         let now = moment();
-        let closestFeed = moment().add(4,'days');
+        let closestFeed = moment().add(4, "days");
 
         for (let element of this.scheduledFeeds) {
           if (element.feedTime < this.timeRightNow) {
-            let timeSplit = element.feedTime.split(':')
-            let feedDate = moment().add(1,'days');
-            feedDate.set({h: timeSplit[0], m: timeSplit[1]});
- 
-            if (feedDate < closestFeed) {
-              closestFeed = feedDate
-              amount = element.amount
-            }
-          } else {
-            let timeSplit = element.feedTime.split(':')
-            let feedDate = moment();
-            feedDate.set({h: timeSplit[0], m: timeSplit[1]});
+            let timeSplit = element.feedTime.split(":");
+            let feedDate = moment().add(1, "days");
+            feedDate.set({ h: timeSplit[0], m: timeSplit[1] });
 
             if (feedDate < closestFeed) {
-              closestFeed = feedDate
-              amount = element.amount
+              closestFeed = feedDate;
+              amount = element.amount;
+            }
+          } else {
+            let timeSplit = element.feedTime.split(":");
+            let feedDate = moment();
+            feedDate.set({ h: timeSplit[0], m: timeSplit[1] });
+
+            if (feedDate < closestFeed) {
+              closestFeed = feedDate;
+              amount = element.amount;
             }
           }
         }
 
-        return amount
+        return amount;
       } else {
         return null;
       }
-    }
-
+    },
   },
   methods: {
+    openPreview() {
+      this.isPreviewingImg = true;
+    },
     fillData() {
       this.datacollection = {
         labels: this.weightLabels,
@@ -265,7 +309,8 @@ export default {
     },
     async fetchData() {
       let apiUrl =
-        process.env.VUE_APP_BACKEND_URL + "?action=all_weights&timeUnit=" +
+        process.env.VUE_APP_BACKEND_URL +
+        "?action=all_weights&timeUnit=" +
         this.timeUnit +
         "&interval=" +
         this.interval;
@@ -305,12 +350,17 @@ export default {
 }
 .feed-times {
   display: flex;
-  margin-bottom: 26px
+  margin-bottom: 26px;
 }
 .feed-time {
   width: 50%;
 }
 .align-right {
-  text-align: end
+  text-align: end;
+}
+.smallCol {
+  max-width: 46px !important;
+  margin-left: -13px;
+  margin-right: 10px;
 }
 </style>
