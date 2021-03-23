@@ -23,7 +23,7 @@ export default {
         sortable: true,
         value: "timestamp",
       },
-      { text: "Amount (g)", value: "amount" },
+      { text: "Amount (C)", value: "amount" },
       { text: "Trigger", value: "trigger" },
     ],
   }),
