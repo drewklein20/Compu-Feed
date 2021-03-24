@@ -29,4 +29,4 @@ for x in dbresult:
 		val = (x[2], "scheduled feed")
 		dbcursor.execute(sql, val)
 		mydb.commit()
-		call(["python", "feed.py"])
+		call(["python", "/var/www/html/php/feed.py"])

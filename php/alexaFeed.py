@@ -47,7 +47,7 @@ def deviceAction(value, deviceName):
         val = (dbresult[0], "alexa")
         dbcursor.execute(sql, val)
         mydb.commit()
-        call(["python", "feed.py"])
+        call(["python", "/var/www/html/php/feed.py"])
 
 def selectDevice(deviceId, action, value):
     if deviceId == deviceStr:  # Replace with your deviceId
