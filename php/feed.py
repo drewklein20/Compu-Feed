@@ -44,9 +44,13 @@ def send_email(emailConfig, petName, feedCups, trigger, cameraEnabled):
         elif trigger == "alexa":
             triggerText = "This feed was triggered by Alexa."
 
+        cupText = "cups"
+        if str(feedCups) == "1":
+           cupText = "cup"
+
         html = html.replace("&petname&", petName)
         html = html.replace("&trigger&", triggerText)
-        html = html.replace("&feedCups&", str(feedCups))
+        html = html.replace("&feedCups&", cupText)
         part1 = MIMEText(html, 'html')
         message.attach(part1)
 
