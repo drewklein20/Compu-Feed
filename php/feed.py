@@ -46,7 +46,7 @@ def send_email(emailConfig, petName, feedCups, trigger, cameraEnabled):
 
         cupText = str(feedCups) + "cups"
         if str(feedCups) == "1":
-           cupText = str(feedCups) "cup"
+           cupText = str(feedCups) + "cup"
         
 
         html = html.replace("&petname&", petName)
