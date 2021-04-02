@@ -44,9 +44,9 @@ def send_email(emailConfig, petName, feedCups, trigger, cameraEnabled):
         elif trigger == "alexa":
             triggerText = "This feed was triggered by Alexa."
 
-        cupText = str(feedCups) + "cups"
+        cupText = str(feedCups) + " cups"
         if str(feedCups) == "1":
-           cupText = str(feedCups) + "cup"
+           cupText = str(feedCups) + " cup"
         
 
         html = html.replace("&petname&", petName)
