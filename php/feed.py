@@ -110,6 +110,22 @@ def feed():
     preferences = json.loads(dbresult[0])
 
     cupDuration = preferences["cupDuration"]
+    speedSetting = preferences["speed"]
+    speed = 2000
+
+    match speedSetting:
+        case "1":
+            speed = 1600
+        case "2":
+            speed = 1700
+        case "3":
+            speed = 1800
+        case "4":
+            speed = 1900
+        case "5":
+            speed = 2000
+        case _:
+            speed = 2000
     emailNotifications = preferences["emailNotifications"]
     cameraEnabled = preferences["isUsingCamera"]
     emailConfig = preferences["emailConfig"]
@@ -141,7 +157,7 @@ def feed():
     if currentWeight < fullBowlWeight:
         try:
             feedAmount = sleepAmount + float(rightBowlOffset)
-            pi.set_servo_pulsewidth(17, 2000)
+            pi.set_servo_pulsewidth(17, speed)
             time.sleep(feedAmount)
             # switch servo off
             pi.set_servo_pulsewidth(17, 0)

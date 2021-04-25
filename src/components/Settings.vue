@@ -377,7 +377,7 @@ export default {
     amount: "1",
     feedResult: "",
     amounts: [".5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5"],
-    speeds: [".5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5"],
+    speeds: ["1", "2", "3", "4", "5"],
     tempSettings: {},
     settings: {
       petName: "Pet",
