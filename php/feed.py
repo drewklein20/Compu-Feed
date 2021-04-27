@@ -116,12 +116,20 @@ def feed():
     if speedSetting == "1":
         speed = 1600
     if speedSetting == "2":
-        speed = 1700
+        speed = 1650
     if speedSetting == "3":
-        speed = 1800
+        speed = 1700
     if speedSetting == "4":
-        speed = 1900
+        speed = 1750
     if speedSetting == "5":
+        speed = 1800
+    if speedSetting == "6":
+        speed = 1850
+    if speedSetting == "7":
+        speed = 1900
+    if speedSetting == "8":
+        speed = 1950
+    if speedSetting == "9":
         speed = 2000
    
     emailNotifications = preferences["emailNotifications"]
