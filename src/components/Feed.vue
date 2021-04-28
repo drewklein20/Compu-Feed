@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+
     <v-card class="mx-auto" max-width="400">
       <v-card-title>
         Feed Now
@@ -37,7 +37,7 @@
         </v-layout>
       </v-card-actions>
     </v-card>
-  </v-container>
+
 </template>
 
 <script>

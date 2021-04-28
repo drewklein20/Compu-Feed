@@ -3,14 +3,14 @@
     <v-container>
       <v-row dense>
         <v-col cols="12">
-          <v-card color="secondary" dark v-if="settings.isUsingScale">
+          <v-card color="secondary" dark v-if="settings.isUsingScale || settings.isUsingCamera">
             <v-card-title class="headline mb-3 dark-text">
               Current Bowl
               <v-spacer></v-spacer>
-              {{ currentWeight }}g
+              {{ settings.isUsingScale ? currentWeight + 'g' : '' }}
             </v-card-title>
 
-            <v-card-subtitle>
+            <v-card-subtitle v-if="settings.isUsingScale">
               <v-progress-linear
                 color="primary"
                 :value="currentPercentage"
@@ -21,18 +21,8 @@
             </v-card-subtitle>
 
             <v-card-actions>
-              <v-btn
-                class="ml-2 mt-1 mb-3"
-                outlined
-                color="primary"
-                rounded
-                small
-                @click="$emit('clickedDrawer', 'Feed Now')"
-              >
-                Feed Now
-              </v-btn>
               <v-spacer></v-spacer>
-              <v-card>
+              <v-card v-if="settings.isUsingCamera">
                 <v-row>
                   <v-col>
                     <v-img
@@ -69,24 +59,39 @@
 
             <v-card-text class="pb-8">
               <v-row>
-                <v-col class="light-text">
-                  {{ totalWeight }}
-                  <v-icon class="ml-2" color="secondary" dark>
-                    mdi-cup
-                  </v-icon>
-                </v-col>
-                <v-col class="light-text">
-                  {{ (totalWeight / cupsPerBag).toFixed(2) }}
-                  <v-icon class="ml-2" color="secondary" dark>
-                    mdi-sack
-                  </v-icon>
-                </v-col>
-                <v-col class="light-text">
-                  {{ (totalWeight / cupsPerBag / 3000).toFixed(2) }}
-                  <v-icon class="ml-2" color="secondary" dark>
-                    mdi-car-pickup
-                  </v-icon>
-                </v-col>
+                <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-col class="light-text" v-bind="attrs" v-on="on">
+                        {{ totalWeight }}
+                        <v-icon class="ml-2" color="secondary" dark>
+                          mdi-cup
+                        </v-icon>
+                      </v-col>
+                    </template>
+                    <span>{{ totalWeight }} cups of dog food</span>
+                </v-tooltip>
+                <v-tooltip top>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-col class="light-text" v-bind="attrs" v-on="on">
+                      {{ (totalWeight / cupsPerBag).toFixed(2) }}
+                      <v-icon class="ml-2" color="secondary" dark>
+                        mdi-sack
+                      </v-icon>
+                    </v-col>
+                  </template>
+                  <span>{{ (totalWeight / cupsPerBag).toFixed(2) }} bags of dog food</span>
+                </v-tooltip>
+                 <v-tooltip top>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-col class="light-text" v-bind="attrs" v-on="on">
+                      {{ (totalWeight / cupsPerBag / 3000).toFixed(2) }}
+                      <v-icon class="ml-2" color="secondary" dark>
+                        mdi-car-pickup
+                      </v-icon>
+                    </v-col>
+                  </template>
+                  <span> {{ (totalWeight / cupsPerBag / 3000).toFixed(2) }} truck loads of dog food</span>
+                </v-tooltip>
               </v-row>
             </v-card-text>
           </v-card>
@@ -100,17 +105,36 @@
             </v-card-title>
 
             <div class="feed-times ml-4 mr-4">
-              <span class="dark-text feed-time">
+              <!-- Left column -->
+              <span v-if="logs.length" class="dark-text feed-time">
                 {{ lastFeed | formatRelative }} ({{ lastFeedAmount }}
                 {{ lastFeedAmount > 1 ? " Cups" : "Cup" }})
               </span>
-              <span class="dark-text feed-time align-right">
+              <span v-else class="dark-text feed-time">
+                never
+              </span>
+              <!-- Right column -->
+              <span v-if="scheduledFeeds.length" class="dark-text feed-time align-right">
                 {{ nextFeed | formatRelative }} ({{ nextFeedAmount }}
                 {{ nextFeedAmount > 1 ? " Cups" : "Cup" }})
+              </span>
+              <span v-else class="dark-text feed-time align-right">
+                no scheduled feeds
               </span>
             </div>
 
             <v-card-actions>
+                <v-btn
+                class="ml-2 mt-1 mb-3"
+                outlined
+                color="primary"
+                rounded
+                small
+                @click="isShowingFeedNow = true"
+              >
+                Feed Now
+              </v-btn>
+              <v-spacer></v-spacer>
               <v-btn
                 class="ml-2 mt-1 mb-3"
                 outlined
@@ -119,7 +143,7 @@
                 small
                 @click="$emit('clickedDrawer', 'Scheduler')"
               >
-                Edit Schedule
+                {{ scheduledFeeds.length ? 'Edit Schedule' : 'Add Scheduled Feed'}}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -135,15 +159,20 @@
         ></v-img>
       </v-card>
     </v-dialog>
+
+    <v-dialog v-model="isShowingFeedNow" max-width="400px">
+      <feed></feed>
+    </v-dialog>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+import feed from "../components/Feed"
 
 export default {
   name: "Home",
-  components: {},
+  components: {feed},
   props: {
     currentWeight: { type: String, required: false },
     currentPercentage: { type: String, required: false },
@@ -164,6 +193,7 @@ export default {
     isPreviewingImg: false,
     cacheKey: +new Date(),
     imgInterval: "",
+    isShowingFeedNow: false
   }),
   async mounted() {
     await this.fetchData();
