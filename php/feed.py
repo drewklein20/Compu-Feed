@@ -146,8 +146,7 @@ def feed():
         fullBowlWeight = preferences["fullBowlWeight"]
 
         dbcursor = mydb.cursor()
-        dbcursor.execute(
-            "SELECT * FROM Feeder.Weights order by id desc limit 1;")
+        dbcursor.execute("SELECT * FROM Feeder.Weights order by id desc limit 1;")
         dbresult = dbcursor.fetchone()
         currentWeight = dbresult[1]
 
@@ -158,29 +157,39 @@ def feed():
     trigger = dbresult[3]
 
     cumulativeTime = 0.0
-    feedAmount = float(cupDuration) * float(feedCups)
+    initialFeedAmount = float(cupDuration) * float(feedCups)
 
     if currentWeight < fullBowlWeight:
         try:
             if isIncrementFeed:
                 while cumulativeTime < feedAmount:
-                    feedAmount = feedAmount + float(rightBowlOffset)
+                    feedAmount = initialFeedAmount + float(rightBowlOffset)
                     pi.set_servo_pulsewidth(17, speed)
                     time.sleep(0.10)
                     pi.set_servo_pulsewidth(17, 0)
                     time.sleep(0.30)
                     cumulativeTime += 1
+                if twoBowls:
+                    cumulativeTime = 0
+                    while cumulativeTime < feedAmount:
+                        feedAmount = initialFeedAmount + float(rightBowlOffset)
+                        pi.set_servo_pulsewidth(17, 1000)
+                        time.sleep(0.10)
+                        pi.set_servo_pulsewidth(17, 0)
+                        time.sleep(0.30)
+                        cumulativeTime += 1
             else:
-                    feedAmount = feedAmount + float(rightBowlOffset)
-                    pi.set_servo_pulsewidth(17, speed)
+                feedAmount = initialFeedAmount + float(rightBowlOffset)
+                pi.set_servo_pulsewidth(17, speed)
+                time.sleep(feedAmount)
+                pi.set_servo_pulsewidth(17, 0)
+
+                if twoBowls:
+                    time.sleep(1)
+                    feedAmount = initialFeedAmount + float(leftBowlOffset)
+                    pi.set_servo_pulsewidth(17, 1000)
                     time.sleep(feedAmount)
                     pi.set_servo_pulsewidth(17, 0)
-                    if twoBowls:
-                        time.sleep(1)
-                        feedAmount = feedAmount + float(leftBowlOffset)
-                        pi.set_servo_pulsewidth(17, 1000)
-                        time.sleep(feedAmount)
-                        pi.set_servo_pulsewidth(17, 0)
             pi.stop()
 
         except KeyboardInterrupt:
