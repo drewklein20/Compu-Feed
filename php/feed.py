@@ -160,10 +160,6 @@ def feed():
     cumulativeTime = 0.0
     feedAmount = float(cupDuration) * float(feedCups)
 
-    if isIncrementFeed:
-        # Change the feed amount if incrementFeed (cupDuration becomes number of pulses)
-        feedAmount = (float(cupDuration) * 0.10) * float(feedCups)
-
     if currentWeight < fullBowlWeight:
         try:
             if isIncrementFeed:
@@ -173,7 +169,7 @@ def feed():
                     time.sleep(0.10)
                     pi.set_servo_pulsewidth(17, 0)
                     time.sleep(0.30)
-                    cumulativeTime += 0.10
+                    cumulativeTime += 1
             else:
                     feedAmount = feedAmount + float(rightBowlOffset)
                     pi.set_servo_pulsewidth(17, speed)
