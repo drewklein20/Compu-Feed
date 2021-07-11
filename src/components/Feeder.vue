@@ -52,7 +52,7 @@
       <feed v-if="selectedDrawerItem == 'Feed Now'" />
       <feed-log v-if="selectedDrawerItem == 'Feed Log'" />
       <pet-weights v-if="selectedDrawerItem == 'Weight Log'" />
-      <schedule v-if="selectedDrawerItem == 'Scheduler'" />
+      <schedule v-if="selectedDrawerItem == 'Feed Scheduler'" />
       <home
         v-if="selectedDrawerItem == 'Home'"
         :currentWeight="weightInGrams"
@@ -85,7 +85,7 @@ export default {
       { title: "Feed Now", icon: "mdi-bowl" },
       { title: "Feed Log", icon: "mdi-table" },
       { title: "Weight Log", icon: "mdi-table" },
-      { title: "Scheduler", icon: "mdi-calendar" },
+      { title: "Feed Scheduler", icon: "mdi-calendar" },
       { title: "Settings", icon: "mdi-cog-outline" },
     ],
     mini: true,

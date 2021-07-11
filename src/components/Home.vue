@@ -163,7 +163,7 @@
                 color="primary"
                 rounded
                 small
-                @click="$emit('clickedDrawer', 'Scheduler')"
+                @click="$emit('clickedDrawer', 'Feed Scheduler')"
               >
                 {{
                   scheduledFeeds.length ? "Edit Schedule" : "Add Scheduled Feed"
