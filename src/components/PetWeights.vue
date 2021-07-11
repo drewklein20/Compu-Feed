@@ -20,7 +20,7 @@
         <template v-slot:item.timestamp="{ item }">
           <span>{{ item.timestamp | formatDate }}</span>
         </template>
-        <template v-slot:item.weight="{ item }">
+        <template v-slot:item.value="{ item }">
           <span>
             {{item.value}} lbs
           </span>
