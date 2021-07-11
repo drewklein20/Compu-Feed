@@ -175,20 +175,13 @@
         <v-col cols="12" class="pt-4">
           <v-card color="primary" dark>
             <v-card-title class="headline">
-              Weight History
+            {{ settings.petName }}'s Weight
               <v-spacer></v-spacer>
-              Current Weight
+              {{currentPetWeightValue}} lbs
             </v-card-title>
 
             <v-card-text class="pb-8">
-               <div class="feed-times">
-                  <span style="color: white;" class="feed-time">
-                 
-                  </span>
-                  <span style="color: white;" class="feed-time align-right">
-                  {{currentPetWeightValue}} lbs
-                  </span>
-               </div>
+
             </v-card-text>
 
             <v-card-actions>
